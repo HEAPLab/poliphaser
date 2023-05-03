@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Home - Documentation</title>
+    <title>poliphaser.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,25 +29,31 @@
 
 <div id="main">
     
+    <h1 class="page-title">poliphaser.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>let PP = {};
+PP.game = {};
 
-
-
-
-
-
-
-
-
-    
-
-
-
+/**
+ * Create the game
+ * @param  config The object containin the game configuration. It must have the following
+ *                mandatory attributes: canvas_width, canvas_height, canvas_background_color,
+ *                canvas_id, scenes. 
+ * @return A game object.
+ */
+PP.game.create = function (config) {
+    console.log(config);
+}</code></pre>
+        </article>
+    </section>
 
 
 
