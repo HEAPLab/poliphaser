@@ -1,7 +1,7 @@
 
 var config = {
     type: Phaser.AUTO,
-    width: 1024,
+    canvas_width: 1024,
     height: 768,
     backgroundColor: 0x000000,
     scene: [],
@@ -9,4 +9,4 @@ var config = {
     parent: "game_area" // Specifica il div contenitore
 }
 
-PP_game_create(config);
+PP.game.create(config);
