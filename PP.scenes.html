@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>game - Documentation</title>
+    <title>scenes - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">game</h1>
+    <h1 class="page-title">scenes</h1>
     
 
     
@@ -44,7 +44,7 @@
         <h2>
             <span class="ancestors"><a href="PP.html">PP</a>.</span>
         
-        game
+        scenes
         </h2>
         
     
@@ -89,7 +89,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line12">line 12</a>
+        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line19">line 19</a>
     </li></ul></dd>
     
 
@@ -126,14 +126,14 @@
 
     
 
-    <h4 class="name" id=".create"><span class="type-signature">(static) </span>create<span class="signature">(config)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".add"><span class="type-signature">(static) </span>add<span class="signature">(scene_name, preload_function, create_function, update_function, destroy_function)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Create the game object and initialize the Phaser framework.  This function must be called before PP.game.start is executed.
+    Add a new scene to the game. This function must be called before PP.game.start is executed.
 </div>
 
 
@@ -169,279 +169,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line29">line 29</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>config</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                The object containing the game configuration.
-                
-                    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>canvas_width</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                The width  of the canvas where the game will be rendered.
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>canvas_height</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                The height of the canvas where the game will be rendered.
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>canvas_id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>string</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                The id of the HTML element containing the canvas.
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>background_color</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                Default background color used when no background is drawn, in RGB HEX format (for example 0x000000).
-                
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-                
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="section-returns">
-<h5>Returns:</h5>
-
-        
-
-
-<div class="param-desc">
-    A game object. The user should not directly manipulate it, but pass it to other functions.
-</div>
-
-    
-</div>
-
-
-
-</div>
-        
-            
-<div class="section-method">
-
-    
-
-    <h4 class="name" id=".start"><span class="type-signature">(static) </span>start<span class="signature">(scene_name)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    Start the game.  This function must be called after the creation of the game (PP.game.create) and the addition of the scenes.
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line48">line 48</a>
+        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line58">line 58</a>
     </li></ul></dd>
     
 
@@ -502,7 +230,111 @@
             
 
             <td class="description last">
-                The name of initial scene where to start the game.
+                A unique name for the scene to be created. It can be an arbitrary string.
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>preload_function</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>function</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                The function executed at the beginning, when the scene is loaded. It should contain the loading of the assets (images, sounds, etc.).
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>create_function</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>function</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                The function executed at the beginning, when the scene is created.
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>update_function</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>function</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                The function executed at each frame.
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>destroy_function</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>function</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                The function executed when the scene is destroyed.
                 
             </td>
         </tr>
