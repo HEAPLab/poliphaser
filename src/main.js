@@ -7,3 +7,4 @@ var config = {
 }
 
 PP.game.create(config);
+//PP.game.start("test1");
