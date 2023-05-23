@@ -24,7 +24,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Namespaces</li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="PP.html">PP</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="PP.game.html">game</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.game.html#.create">create</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.game.html#.start">start</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="PP.scenes.html">scenes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.scenes.html#.add">add</a></span></li>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Namespaces</li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="PP.html">PP</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="PP.assets.html">assets</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.assets.html#.load_image">load_image</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="PP.game.html">game</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.game.html#.create">create</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.game.html#.start">start</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="PP.scenes.html">scenes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.scenes.html#.add">add</a></span></li>
 </nav>
 
 <div id="main">
@@ -39,7 +39,22 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
+            <pre class="prettyprint source linenums"><code>const cyrb53 = (str, seed = 0) => {
+    let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
+    for(let i = 0, ch; i &lt; str.length; i++) {
+        ch = str.charCodeAt(i);
+        h1 = Math.imul(h1 ^ ch, 2654435761);
+        h2 = Math.imul(h2 ^ ch, 1597334677);
+    }
+    h1  = Math.imul(h1 ^ (h1 >>> 16), 2246822507);
+    h1 ^= Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+    h2  = Math.imul(h2 ^ (h2 >>> 16), 2246822507);
+    h2 ^= Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+  
+    return 4294967296 * (2097151 &amp; h2) + (h1 >>> 0);
+};
+
+/**
  * The main namespace of FunPhaser.
  * @namespace
  */
@@ -53,11 +68,20 @@ let PP = {};
 PP.game   = {};
 
 /**
- * The namespace containing the main functions of the scene management.
+ * The namespace containing functions for the scene management.
  * @namespace
  * @memberof PP
  */
 PP.scenes = {};
+
+/**
+ * The namespace containing functions to load and manage assets
+ * @namespace
+ * @memberof PP
+ */
+PP.assets = {
+    list_images_id : []
+};
 
 PP.debug = {
     assert : function(condition, message) {
@@ -100,7 +124,7 @@ PP.game.create = function (config) {
         parent: config.canvas_id
     };
     
-    PP.game.phaser_obj = new Phaser.Game(phaser_config);
+    PP.game.ph_obj = new Phaser.Game(phaser_config);
 }
 
 /**
@@ -114,7 +138,7 @@ PP.game.start = function (scene_name) {
 
     PP.debug.assert(PP.scenes.list_names.includes(scene_name), "Trying to start a non-existent scene: " + scene_name);
 
-    PP.game.phaser_obj.scene.start(scene_name);
+    PP.game.ph_obj.scene.start(scene_name);
 }
 
 /**
@@ -131,7 +155,7 @@ PP.scenes.add = function(scene_name, preload_function, create_function, update_f
 
     PP.debug.assert(typeof scene_name === "string", "Parameter error: scene_name is not a string.");
 
-    PP.debug.assert(typeof preload_function    === "function", "Parameter error: load_function is not a function.");
+    PP.debug.assert(typeof preload_function === "function", "Parameter error: load_function is not a function.");
     PP.debug.assert(typeof create_function  === "function", "Parameter error: create_function is not a function.");
     PP.debug.assert(typeof update_function  === "function", "Parameter error: update_function is not a function.");
     PP.debug.assert(typeof destroy_function === "function", "Parameter error: destroy_function is not a function.");
@@ -149,13 +173,37 @@ PP.scenes.add = function(scene_name, preload_function, create_function, update_f
 
     // Now it's time to create the Phaser scene object
     let scene = new Phaser.Scene(scene_name);
-    scene.preload = preload_function;
-    scene.create  = create_function;
-    scene.update  = update_function;
-    scene.destroy = destroy_function;
+    scene.preload = ()=>{preload_function(scene);};
+    scene.create  = ()=>{create_function(scene);};
+    scene.update  = ()=>{update_function(scene);};
+    scene.destroy = ()=>{destroy_function(scene);};
 
     PP.scenes.list.push(scene);
 
+}
+
+/**
+ * Load a new image.
+ * @function load_image
+ * @memberof PP.assets
+ * @param {string}   image_path       A path of the image to load. It can be relative to the current page or a full URL.
+ * @return An image object.
+ */
+PP.assets.load_image = function(scene, image_path) {
+    PP.debug.assert(typeof scene      === "object", "Parameter error: scene should be a scene object.");
+    PP.debug.assert(typeof image_path === "string", "Parameter error: image_path should be a string.");
+
+    let url_hash = cyrb53(image_path);  // This is used as ID
+
+    if(PP.assets.list_images_id.includes(url_hash)) {
+        console.warn('WARNING: you are trying to load multiple times the same image ('+image_path+'). Aborting this load request.');
+        return {id: url_hash};
+    }
+
+    PP.assets.list_images_id.push(url_hash);
+
+    scene.load.image(url_hash, image_path);
+    return {id: url_hash};
 }</code></pre>
         </article>
     </section>
@@ -168,7 +216,7 @@ PP.scenes.add = function(scene_name, preload_function, create_function, update_f
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Tue May 23 2023 00:39:01 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Tue May 23 2023 01:15:34 GMT+0000 (Coordinated Universal Time) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>scenes - Documentation</title>
+    <title>assets - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">scenes</h1>
+    <h1 class="page-title">assets</h1>
     
 
     
@@ -44,7 +44,7 @@
         <h2>
             <span class="ancestors"><a href="PP.html">PP</a>.</span>
         
-        scenes
+        assets
         </h2>
         
     
@@ -54,7 +54,7 @@
     <div class="container-overview">
     
         
-            <div class="description">The namespace containing functions for the scene management.</div>
+            <div class="description">The namespace containing functions to load and manage assets</div>
         
 
         
@@ -89,7 +89,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line34">line 34</a>
+        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line41">line 41</a>
     </li></ul></dd>
     
 
@@ -126,14 +126,14 @@
 
     
 
-    <h4 class="name" id=".add"><span class="type-signature">(static) </span>add<span class="signature">(scene_name, preload_function, create_function, update_function, destroy_function)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".load_image"><span class="type-signature">(static) </span>load_image<span class="signature">(image_path)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Add a new scene to the game. This function must be called before PP.game.start is executed.
+    Load a new image.
 </div>
 
 
@@ -169,7 +169,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line103">line 103</a>
+        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line144">line 144</a>
     </li></ul></dd>
     
 
@@ -213,7 +213,7 @@
 
         <tr>
             
-                <td class="name"><code>scene_name</code></td>
+                <td class="name"><code>image_path</code></td>
             
 
             <td class="type">
@@ -230,111 +230,7 @@
             
 
             <td class="description last">
-                A unique name for the scene to be created. It can be an arbitrary string.
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>preload_function</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>function</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                The function executed at the beginning, when the scene is loaded. It should contain the loading of the assets (images, sounds, etc.) and initialization stuff.
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>create_function</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>function</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                The function executed at the beginning, when the scene is created.
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>update_function</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>function</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                The function executed at each frame.
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>destroy_function</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>function</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                The function executed when the scene is destroyed.
+                A path of the image to load. It can be relative to the current page or a full URL.
                 
             </td>
         </tr>
@@ -355,6 +251,19 @@
 
 
 
+
+<div class="section-returns">
+<h5>Returns:</h5>
+
+        
+
+
+<div class="param-desc">
+    An image object.
+</div>
+
+    
+</div>
 
 
 
