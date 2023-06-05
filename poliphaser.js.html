@@ -24,7 +24,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Namespaces</li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="PP.html">PP</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="PP.assets.html">assets</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.assets.html#.load_image">load_image</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="PP.game.html">game</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.game.html#.create">create</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.game.html#.start">start</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="PP.scenes.html">scenes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.scenes.html#.add">add</a></span></li>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Namespaces</li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="PP.html">PP</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="PP.assets.html">assets</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.assets.html#.add_image">add_image</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.assets.html#.load_image">load_image</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.assets.html#.load_spritesheet">load_spritesheet</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="PP.game.html">game</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.game.html#.create">create</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.game.html#.start">start</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="PP.scenes.html">scenes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.scenes.html#.add">add</a></span></li>
 </nav>
 
 <div id="main">
@@ -39,7 +39,9 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const cyrb53 = (str, seed = 0) => {
+            <pre class="prettyprint source linenums"><code>/************* HELPER FUNCTIONS *************/
+
+const cyrb53 = (str, seed = 0) => {
     let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
     for(let i = 0, ch; i &lt; str.length; i++) {
         ch = str.charCodeAt(i);
@@ -51,8 +53,10 @@
     h2  = Math.imul(h2 ^ (h2 >>> 16), 2246822507);
     h2 ^= Math.imul(h1 ^ (h1 >>> 13), 3266489909);
   
-    return 4294967296 * (2097151 &amp; h2) + (h1 >>> 0);
+    return (4294967296 * (2097151 &amp; h2) + (h1 >>> 0)).toString();
 };
+
+/************* MAIN OBJECTS *************/
 
 /**
  * The main namespace of FunPhaser.
@@ -90,6 +94,8 @@ PP.debug = {
         }
     }
 }
+
+/************* GAME FUNCTIONS *************/
 
 /**
  * Create the game object and initialize the Phaser framework.  This function must be called before PP.game.start is executed.
@@ -182,12 +188,14 @@ PP.scenes.add = function(scene_name, preload_function, create_function, update_f
 
 }
 
+/************* LOADERS *************/
+
 /**
  * Load a new image.
  * @function load_image
  * @memberof PP.assets
  * @param {string}   image_path       A path of the image to load. It can be relative to the current page or a full URL.
- * @return An image object.
+ * @return An image object representing the image file itself.
  */
 PP.assets.load_image = function(scene, image_path) {
     PP.debug.assert(typeof scene      === "object", "Parameter error: scene should be a scene object.");
@@ -196,7 +204,7 @@ PP.assets.load_image = function(scene, image_path) {
     let url_hash = cyrb53(image_path);  // This is used as ID
 
     if(PP.assets.list_images_id.includes(url_hash)) {
-        console.warn('WARNING: you are trying to load multiple times the same image ('+image_path+'). Aborting this load request.');
+        console.warn('WARNING: you are trying to load multiple times the same image/spritesheet ('+image_path+'). Aborting this load request.');
         return {id: url_hash};
     }
 
@@ -204,7 +212,61 @@ PP.assets.load_image = function(scene, image_path) {
 
     scene.load.image(url_hash, image_path);
     return {id: url_hash};
-}</code></pre>
+}
+
+/**
+ * Load a new spritesheet.
+ * @function load_spritesheet
+ * @memberof PP.assets
+ * @param {string}   image_path       A path of the image containing the spritesheet to load. It can be relative to the current page or a full URL.
+ * @return An image object representing the spritesheet image file itself.
+ */
+PP.assets.load_spritesheet = function(scene, image_path, frame_width, frame_height, start_frame, end_frame) {
+    PP.debug.assert(typeof scene        === "object", "Parameter error: scene should be a scene object.");
+    PP.debug.assert(typeof image_path   === "string", "Parameter error: image_path should be a string.");
+    PP.debug.assert(typeof frame_width  === "number", "Parameter error: frame_width should be a number.");
+    PP.debug.assert(typeof frame_height === "number", "Parameter error: frame_height should be a number.");
+    PP.debug.assert(typeof start_frame  === "number", "Parameter error: start_frame should be a number.");
+    PP.debug.assert(typeof end_frame    === "number", "Parameter error: end_frame should be a number.");
+
+    let url_hash = cyrb53(image_path);  // This is used as ID
+
+    if(PP.assets.list_images_id.includes(url_hash)) {
+        console.warn('WARNING: you are trying to load multiple times the same image/spritesheet ('+image_path+'). Aborting this load request.');
+        return {id: url_hash};
+    }
+
+    PP.assets.list_images_id.push(url_hash);
+
+    scene.load.spritesheet(url_hash, image_path, { frameWidth: frame_width, frameHeight: frame_height, startFrame: start_frame, endFrame: end_frame });
+    return {id: url_hash};
+}
+
+/************* ADDERS *************/
+
+/**
+ * Add and position a new image in the scene.
+ * @function add_image
+ * @memberof PP.assets
+ * @param {object}   image       The object of an image returned by PP.assets.load_image.
+ * @return An image object representing the specific image added to the scene.
+ */
+PP.assets.add_image = function(scene, image, x, y, pivot_x, pivot_y) {
+    PP.debug.assert(typeof scene === "object", "Parameter error: scene should be a scene object.");
+    PP.debug.assert(typeof image === "object", "Parameter error: image should be an object.");
+    PP.debug.assert(typeof image.id === "string", "Parameter error: image is not a valid image object.");
+    PP.debug.assert(typeof x === "number", "Parameter error: x should be a number.");
+    PP.debug.assert(typeof y === "number", "Parameter error: y should be a number.");
+    PP.debug.assert(typeof pivot_x === "number", "Parameter error: pivot_x should be a number.");
+    PP.debug.assert(typeof pivot_y === "number", "Parameter error: pivot_y should be a number.");
+
+
+    let temp_image = scene.add.image(x, y, image.id);
+    temp_image.setOrigin(pivot_x,pivot_y);
+
+    return temp_image;
+}
+</code></pre>
         </article>
     </section>
 
@@ -216,7 +278,7 @@ PP.assets.load_image = function(scene, image_path) {
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Tue May 23 2023 01:15:34 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Mon Jun 05 2023 21:39:44 GMT+0000 (Coordinated Universal Time) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
