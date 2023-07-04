@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>game - Documentation</title>
+    <title>interactive - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">game</h1>
+    <h1 class="page-title">interactive</h1>
     
 
     
@@ -44,7 +44,7 @@
         <h2>
             <span class="ancestors"><a href="PP.html">PP</a>.</span>
         
-        game
+        interactive
         </h2>
         
     
@@ -54,7 +54,7 @@
     <div class="container-overview">
     
         
-            <div class="description">The namespace containing the main functions of the game engine.</div>
+            <div class="description">The namespace containing functions for the mouse and keyboard management.</div>
         
 
         
@@ -89,7 +89,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line35">line 35</a>
+        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line60">line 60</a>
     </li></ul></dd>
     
 
@@ -126,14 +126,14 @@
 
     
 
-    <h4 class="name" id=".create"><span class="type-signature">(static) </span>create<span class="signature">(config)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".mouse_add"><span class="type-signature">(static) </span>mouse_add<span class="signature">(obj, string, function)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Create the game object and initialize the Phaser framework.  This function must be called before PP.game.start is executed.
+    Add a new interaction with an object
 </div>
 
 
@@ -169,7 +169,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line75">line 75</a>
+        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line378">line 378</a>
     </li></ul></dd>
     
 
@@ -213,51 +213,13 @@
 
         <tr>
             
-                <td class="name"><code>config</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                The object containing the game configuration.
-                
-                    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>canvas_width</code></td>
+                <td class="name"><code>obj</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><code>number</code></span>
+<span class="param-type"><code>object</code></span>
 
 
             
@@ -268,7 +230,7 @@
             
 
             <td class="description last">
-                The width  of the canvas where the game will be rendered.
+                The object onto the interaction will be enabled.
                 
             </td>
         </tr>
@@ -277,13 +239,13 @@
 
         <tr>
             
-                <td class="name"><code>canvas_height</code></td>
+                <td class="name"><code>string</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><code>number</code></span>
+<span class="param-type"><code>type_of_event</code></span>
 
 
             
@@ -294,7 +256,7 @@
             
 
             <td class="description last">
-                The height of the canvas where the game will be rendered.
+                Identify the type of interaction. It can be: "pointerdown", ... TODO check phaser
                 
             </td>
         </tr>
@@ -303,13 +265,13 @@
 
         <tr>
             
-                <td class="name"><code>canvas_id</code></td>
+                <td class="name"><code>function</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><code>string</code></span>
+<span class="param-type"><code>function_to_call</code></span>
 
 
             
@@ -320,189 +282,7 @@
             
 
             <td class="description last">
-                The id of the HTML element containing the canvas.
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>background_color</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                Default background color used when no background is drawn, in RGB HEX format (for example 0x000000).
-                
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-                
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="section-returns">
-<h5>Returns:</h5>
-
-        
-
-
-<div class="param-desc">
-    A game object. The user should not directly manipulate it, but pass it to other functions.
-</div>
-
-    
-</div>
-
-
-
-</div>
-        
-            
-<div class="section-method">
-
-    
-
-    <h4 class="name" id=".start"><span class="type-signature">(static) </span>start<span class="signature">(scene_name)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    Start the game.  This function must be called after the creation of the game (PP.game.create) and the addition of the scenes.
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line111">line 111</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>scene_name</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>string</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                The name of initial scene where to start the game.
+                Callback function to call when an event occurred. The function must accept one parameter: the current scene.
                 
             </td>
         </tr>

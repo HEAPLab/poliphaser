@@ -24,7 +24,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Namespaces</li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="PP.html">PP</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="PP.assets.html">assets</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.assets.html#.add_image">add_image</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.assets.html#.load_image">load_image</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.assets.html#.load_spritesheet">load_spritesheet</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="PP.game.html">game</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.game.html#.create">create</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.game.html#.start">start</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="PP.scenes.html">scenes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.scenes.html#.add">add</a></span></li>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Namespaces</li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="PP.html">PP</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="PP.assets.html">assets</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.assets.html#.add_image">add_image</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.assets.html#.load_image">load_image</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.assets.html#.load_spritesheet">load_spritesheet</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="PP.game.html">game</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.game.html#.create">create</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.game.html#.start">start</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="PP.interactive.html">interactive</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.interactive.html#.mouse_add">mouse_add</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="PP.scenes.html">scenes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.scenes.html#.add">add</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.scenes.html#.start">start</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.scenes.html#.start_overlay">start_overlay</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.scenes.html#.stop">stop</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PP.scenes.html#.stop_overlay">stop_overlay</a></span></li>
 </nav>
 
 <div id="main">
@@ -39,7 +39,11 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/************* HELPER FUNCTIONS *************/
+            <pre class="prettyprint source linenums"><code>// TODO List:
+// - Physics
+// - Rectangles and other simple shapes
+
+/************* HELPER FUNCTIONS *************/
 
 const cyrb53 = (str, seed = 0) => {
     let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
@@ -84,8 +88,20 @@ PP.scenes = {};
  * @memberof PP
  */
 PP.assets = {
-    list_images_id : []
+    list_images_id : [],
+    image  : {},
+    sprite : {},
 };
+
+/**
+ * The namespace containing functions for the mouse and keyboard management.
+ * @namespace
+ * @memberof PP
+ */
+PP.interactive = {
+    mouse : {}
+};
+
 
 PP.debug = {
     assert : function(condition, message) {
@@ -188,7 +204,73 @@ PP.scenes.add = function(scene_name, preload_function, create_function, update_f
 
 }
 
-/************* LOADERS *************/
+/**
+ * Stop the current scene (if any) and start a new one. This function is also used to start the whole game.
+ * @function start
+ * @memberof PP.scenes
+ * @param {string}   scene_name       A unique name for the scene to be created. It can be an arbitrary string.
+ */
+PP.scenes.start = function(scene_name) {
+    PP.debug.assert(typeof scene_name === "string", "Parameter error: scene_name is not a string.");
+
+    PP.debug.assert(PP.scenes.list_names.includes(scene_name), "No scene named '"+ scene_name+"' exist.");
+
+    PP.game.current_main_scene_name = scene_name; // TODO: should we also save the scene object?
+
+    // Let's start the new scene
+    // TODO: Check whether Phaser actually stop the previous scene.
+    PP.game.ph_obj.scene.start(scene_name);
+
+}
+
+/**
+ * Stop the current scene.
+ * @function stop
+ * @memberof PP.scenes
+ */
+PP.scenes.stop = function() {
+    PP.debug.assert(PP.game.current_scene_name, "Well, you should start a scene before stopping it!");
+    PP.game.ph_obj.scene.stop();
+}
+
+/**
+ * Start a new one as overlay of the current one. This function pauses (but not stop) the current scene.
+ * Multiple overlays are not allowed, only one overlay at a time can be started.
+ * @function start_overlay
+ * @memberof PP.scenes
+ * @param {string}   scene_name       A unique name for the scene to be created. It can be an arbitrary string.
+ */
+PP.scenes.start_overlay = function(scene_name) {
+    PP.debug.assert(typeof scene_name === "string", "Parameter error: scene_name is not a string.");
+    PP.debug.assert(PP.scenes.list_names.includes(scene_name), "No scene named '"+ scene_name+"' exist.");
+    PP.debug.assert(PP.game.current_scene_name, "A non-overlay scene must be previously started.");
+    PP.debug.assert(PP.scenes.in_overlay_mode, "Multiple overlays are not allowed, you must stop the previous one.");
+
+    PP.scenes.in_overlay_mode = true;
+
+    // Let's launch the new scene
+    PP.game.ph_obj.scene.launch(scene_name);
+
+}
+
+/**
+ * Remove the overlay and resume the main scene. It must be called within overlay scene functions.
+ * @function stop_overlay
+ * @memberof PP.scenes
+ */
+PP.scenes.stop_overlay = function() {
+    PP.debug.assert(PP.game.current_scene_name, "This should not occur: the main scene name does not exist.");
+
+    PP.scenes.in_overlay_mode = false;
+
+    // Let's launch the new scene
+    PP.game.ph_obj.scene.resume(PP.game.current_scene_name);
+    PP.game.ph_obj.scene.stop();
+}
+
+
+/************* IMAGES *************/
+
 
 /**
  * Load a new image.
@@ -197,7 +279,7 @@ PP.scenes.add = function(scene_name, preload_function, create_function, update_f
  * @param {string}   image_path       A path of the image to load. It can be relative to the current page or a full URL.
  * @return An image object representing the image file itself.
  */
-PP.assets.load_image = function(scene, image_path) {
+PP.assets.image.load = function(scene, image_path) {
     PP.debug.assert(typeof scene      === "object", "Parameter error: scene should be a scene object.");
     PP.debug.assert(typeof image_path === "string", "Parameter error: image_path should be a string.");
 
@@ -205,14 +287,40 @@ PP.assets.load_image = function(scene, image_path) {
 
     if(PP.assets.list_images_id.includes(url_hash)) {
         console.warn('WARNING: you are trying to load multiple times the same image/spritesheet ('+image_path+'). Aborting this load request.');
-        return {id: url_hash};
+        return {id: url_hash, type: "image"};
     }
 
     PP.assets.list_images_id.push(url_hash);
 
     scene.load.image(url_hash, image_path);
-    return {id: url_hash};
+    return {id: url_hash, type: "image"};
 }
+
+
+/**
+ * Add and position a new image in the scene. TODO: Documentation
+ * @function add_image
+ * @memberof PP.assets
+ * @param {object}   image       The object of an image returned by PP.assets.load_image.
+ * @return An image object representing the specific image added to the scene.
+ */
+PP.assets.image.add = function(scene, image, x, y, pivot_x, pivot_y) {
+    PP.debug.assert(typeof scene === "object", "Parameter error: scene should be a scene object.");
+    PP.debug.assert(typeof image === "object", "Parameter error: image should be an object.");
+    PP.debug.assert(typeof image.id === "string", "Parameter error: image is not a valid image object.");
+    PP.debug.assert(image.type === "image", "Parameter error: image is an object but not an image.");
+    PP.debug.assert(typeof x === "number", "Parameter error: x should be a number.");
+    PP.debug.assert(typeof y === "number", "Parameter error: y should be a number.");
+    PP.debug.assert(typeof pivot_x === "number", "Parameter error: pivot_x should be a number.");
+    PP.debug.assert(typeof pivot_y === "number", "Parameter error: pivot_y should be a number.");
+
+    let temp_image = scene.add.image(x, y, image.id);
+    temp_image.setOrigin(pivot_x,pivot_y);
+
+    return {ph_obj: temp_image, orig_image : image};
+}
+
+/************* SPRITES *************/
 
 /**
  * Load a new spritesheet.
@@ -221,7 +329,7 @@ PP.assets.load_image = function(scene, image_path) {
  * @param {string}   image_path       A path of the image containing the spritesheet to load. It can be relative to the current page or a full URL.
  * @return An image object representing the spritesheet image file itself.
  */
-PP.assets.load_spritesheet = function(scene, image_path, frame_width, frame_height, start_frame, end_frame) {
+PP.assets.sprite.load_spritesheet = function(scene, image_path, frame_width, frame_height, start_frame, end_frame) {
     PP.debug.assert(typeof scene        === "object", "Parameter error: scene should be a scene object.");
     PP.debug.assert(typeof image_path   === "string", "Parameter error: image_path should be a string.");
     PP.debug.assert(typeof frame_width  === "number", "Parameter error: frame_width should be a number.");
@@ -233,39 +341,102 @@ PP.assets.load_spritesheet = function(scene, image_path, frame_width, frame_heig
 
     if(PP.assets.list_images_id.includes(url_hash)) {
         console.warn('WARNING: you are trying to load multiple times the same image/spritesheet ('+image_path+'). Aborting this load request.');
-        return {id: url_hash};
+        return {id: url_hash, type: "sprite"};
     }
 
     PP.assets.list_images_id.push(url_hash);
 
     scene.load.spritesheet(url_hash, image_path, { frameWidth: frame_width, frameHeight: frame_height, startFrame: start_frame, endFrame: end_frame });
-    return {id: url_hash};
+    return {id: url_hash, type: "sprite"};
 }
 
-/************* ADDERS *************/
-
-/**
- * Add and position a new image in the scene.
- * @function add_image
- * @memberof PP.assets
- * @param {object}   image       The object of an image returned by PP.assets.load_image.
- * @return An image object representing the specific image added to the scene.
- */
-PP.assets.add_image = function(scene, image, x, y, pivot_x, pivot_y) {
+PP.assets.sprite.add = function(scene, sprite, x, y, pivot_x, pivot_y) {
     PP.debug.assert(typeof scene === "object", "Parameter error: scene should be a scene object.");
-    PP.debug.assert(typeof image === "object", "Parameter error: image should be an object.");
-    PP.debug.assert(typeof image.id === "string", "Parameter error: image is not a valid image object.");
+    PP.debug.assert(typeof sprite === "object", "Parameter error: sprite should be an object.");
+    PP.debug.assert(typeof sprite.id === "string", "Parameter error: sprite is not a valid sprite object.");
+    PP.debug.assert(sprite.type === "sprite", "Parameter error: sprite is an object but not a sprite.");
     PP.debug.assert(typeof x === "number", "Parameter error: x should be a number.");
     PP.debug.assert(typeof y === "number", "Parameter error: y should be a number.");
     PP.debug.assert(typeof pivot_x === "number", "Parameter error: pivot_x should be a number.");
     PP.debug.assert(typeof pivot_y === "number", "Parameter error: pivot_y should be a number.");
 
-
-    let temp_image = scene.add.image(x, y, image.id);
+    let temp_image = scene.add.sprite(x, y, sprite.id);
     temp_image.setOrigin(pivot_x,pivot_y);
 
-    return temp_image;
+    return {ph_obj: temp_image, orig_sprite : sprite, list_of_animations : []};
 }
+
+PP.assets.sprite.animation_add = function(sprite_instance, animation_name, frame_start_nr, frame_end_nr, frame_rate, repeat) {
+    PP.debug.assert(typeof sprite_instance             === "object", "Parameter error: sprite should be an object.");
+    PP.debug.assert(typeof sprite_instance.ph_obj      === "object", "Parameter error: sprite is not a valid sprite instance.");
+    PP.debug.assert(typeof sprite_instance.orig_sprite === "object", "Parameter error: sprite is not a valid sprite instance.");
+
+    PP.debug.assert(typeof frame_start_nr === "number", "Parameter error: frame_start_nr should be a number.");
+    PP.debug.assert(typeof frame_end_nr   === "number", "Parameter error: frame_end_nr should be a number.");
+    PP.debug.assert(typeof frame_rate     === "number", "Parameter error: frame_rate should be a number.");
+    PP.debug.assert(typeof repeat         === "number", "Parameter error: repeat should be a number.");
+
+    PP.debug.assert(typeof animation_name === "string", "Parameter error: animation_name is not a string.");
+    PP.debug.assert(!sprite_instance.list_of_animations.includes(animation_name), "Duplicated animation name!");
+
+
+    PP.debug.assert(frame_start_nr >= 0, "Parameter error: frame_start_nr invalid number (&lt;0).");
+    PP.debug.assert(frame_end_nr >= 0, "Parameter error: frame_end_nr invalid number (&lt;0).");
+    PP.debug.assert(frame_rate > 0, "Parameter error: frame_rate invalid number (&lt;=0).");
+    PP.debug.assert(repeat >= -1, "Parameter error: repeat invalid number (&lt;-1).");
+
+    sprite_instance.ph_obj.anims.create({
+        key: animation_name,
+        frames: sprite_instance.ph_obj.anims.generateFrameNumbers(sprite_instance.orig_sprite.id, {
+            start: frame_start_nr,
+            end: frame_end_nr,
+        }),
+        frameRate: frame_rate,
+        repeat: repeat
+    });
+
+    sprite_instance.list_of_animations.push(animation_name);
+}
+
+PP.assets.sprite.animation_play = function(sprite_instance, animation_name) {
+    PP.debug.assert(typeof sprite_instance             === "object", "Parameter error: sprite should be an object.");
+    PP.debug.assert(typeof sprite_instance.ph_obj      === "object", "Parameter error: sprite is not a valid sprite instance.");
+    PP.debug.assert(typeof sprite_instance.orig_sprite === "object", "Parameter error: sprite is not a valid sprite instance.");
+
+    PP.debug.assert(typeof animation_name === "string", "Parameter error: animation_name is not a string.");
+    PP.debug.assert(sprite_instance.list_of_animations.includes(animation_name), "Animation does not exist!");
+
+    sprite_instance.ph_obj.anims.play(animation_name);
+
+}
+
+PP.assets.sprite.animation_stop = function(sprite_instance) {
+    sprite_instance.ph_obj.anims.stop();
+}
+
+
+/************* INTERACTIVE *************/
+/**
+ * Add a new interaction with an object
+ * @function mouse_add
+ * @memberof PP.interactive
+ * @param {object}           obj       The object onto the interaction will be enabled.
+ * @param {type_of_event}    string    Identify the type of interaction. It can be: "pointerdown", ... TODO check phaser
+ * @param {function_to_call} function  Callback function to call when an event occurred. The function must accept one parameter: the current scene.
+ */
+PP.interactive.mouse.add = function(obj, type_of_event, function_to_call) {
+    PP.debug.assert(typeof obj === "object",               "Parameter error: obj should be an object.");
+    PP.debug.assert(typeof obj.ph_obj === "object",        "Parameter error: obj is an object but it is not a valid object.");
+    PP.debug.assert(typeof type_of_event === "string",     "Parameter error: type_of_event should be a string.");
+    PP.debug.assert(typeof function_to_call === "function","Parameter error: function_to_call should be a function.");
+
+    let valid_events = ["pointerdown"]; // TODO
+    PP.debug.assert(valid_events.includes(type_of_event), "Parameter error: type_of_event is invalid.");
+
+    obj.ph_obj.setInteractive();
+    obj.ph_obj.on(type_of_event, () => { function_to_call(this.game.ph_obj.scene); });
+}
+
 </code></pre>
         </article>
     </section>
@@ -278,7 +449,7 @@ PP.assets.add_image = function(scene, image, x, y, pivot_x, pivot_y) {
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Mon Jun 05 2023 21:39:44 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Tue Jul 04 2023 11:17:25 GMT+0000 (Coordinated Universal Time) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
