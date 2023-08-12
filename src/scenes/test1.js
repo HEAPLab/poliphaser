@@ -23,6 +23,9 @@ function create(s) {
     console.log("Executing create()");
     img_background_instance = PP.assets.image.add(s, img_background, 0, 0, 0, 0);
 
+    let rectangle = PP.shapes.rectangle_add(s, 300, 500, 400, 200, "0xFF0000", 1);
+    PP.shapes.destroy(rectangle);
+
     player_instance = PP.assets.sprite.add(s, ss_player, 0, 0, 0, 0);
     PP.assets.sprite.animation_add(player_instance, "walk", 0, 10, 10, -1);
     PP.assets.sprite.animation_play(player_instance, "walk");
