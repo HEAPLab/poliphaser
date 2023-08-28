@@ -15,7 +15,7 @@ function on_sprite_click() {
 function preload(s) {
     console.log("Executing preload()");
     img_background = PP.assets.image.load(s, "assets/images/background.png");
-    ss_player = PP.assets.sprite.load_spritesheet(s, "assets/images/spritesheet_scaled.png", 223, 190, 0, 4);
+    ss_player = PP.assets.sprite.load_spritesheet(s, "assets/images/spritesheet_scaled.png", 223, 190, 0, 10);
 
 }
 
@@ -25,7 +25,10 @@ function create(s) {
 
     let rectangle = PP.shapes.rectangle_add(s, 300, 500, 400, 200, "0xFF0000", 1);
     PP.shapes.destroy(rectangle);
-    let arch = PP.shapes.arc_add(s, 300, 500, 30, 20, 187, false, "0x00F0F0", 1);
+    let arc = PP.shapes.arc_add(s, 300, 500, 30, 20, 187, false, "0x00F0F0", 1);
+
+    PP.shapes.set_stroke(arc, 5, "0x00FF00", 1);
+
 
     player_instance = PP.assets.sprite.add(s, ss_player, 0, 0, 0, 0);
     PP.assets.sprite.animation_add(player_instance, "walk", 0, 10, 10, -1);
