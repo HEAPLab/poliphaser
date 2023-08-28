@@ -29,6 +29,8 @@ function create(s) {
 
     PP.shapes.set_stroke(arc, 5, "0x00FF00", 1);
 
+    PP.shapes.polygon_add(s, 300, 300, [0, 0, 100, 0, 100, 100, 0, 100], "0xFFFFFF", 0.5);
+
 
     player_instance = PP.assets.sprite.add(s, ss_player, 0, 0, 0, 0);
     PP.assets.sprite.animation_add(player_instance, "walk", 0, 10, 10, -1);
