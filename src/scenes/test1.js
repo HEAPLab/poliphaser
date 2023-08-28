@@ -25,6 +25,7 @@ function create(s) {
 
     let rectangle = PP.shapes.rectangle_add(s, 300, 500, 400, 200, "0xFF0000", 1);
     PP.shapes.destroy(rectangle);
+    let arch = PP.shapes.arc_add(s, 300, 500, 30, 20, 187, false, "0x00F0F0", 1);
 
     player_instance = PP.assets.sprite.add(s, ss_player, 0, 0, 0, 0);
     PP.assets.sprite.animation_add(player_instance, "walk", 0, 10, 10, -1);
