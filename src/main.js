@@ -9,4 +9,4 @@ var config = {
 };
 
 PP.game.create(config);
-//PP.game.start("test1");
+PP.game.start("test1");
