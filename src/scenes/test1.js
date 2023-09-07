@@ -22,7 +22,6 @@ function preload(s) {
 function create(s) {
     console.log("Executing create() - SCENE 1");
     img_background_instance = PP.assets.image.add(s, img_background, 0, 0, 0, 0);
-    console.log(img_background_instance.position.x);
 
     let rectangle = PP.shapes.rectangle_add(s, 300, 500, 400, 200, "0xFF0000", 1);
     PP.shapes.destroy(rectangle);
@@ -44,6 +43,9 @@ function create(s) {
 
 function update(s) {
     console.log("Executing update() - SCENE 1");
+
+    img_background_instance.position.x++;
+    player_instance.position.y++;
 
     if (frame_count++ == 100) {
         PP.assets.sprite.animation_stop(player_instance);
