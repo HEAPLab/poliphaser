@@ -42,6 +42,11 @@ function create(s) {
 }
 
 function update(s) {
+
+    if(PP.interactive.kb.is_key_up(s, PP.KeyCodes.SPACE)) {
+        console.log("PRESSING SPACE!");
+        return;
+    }
     console.log("Executing update() - SCENE 1");
 
     img_background_instance.position.x++;
