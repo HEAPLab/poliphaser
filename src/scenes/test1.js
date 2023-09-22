@@ -49,8 +49,8 @@ function update(s) {
     }
     console.log("Executing update() - SCENE 1");
 
-    img_background_instance.position.x++;
-    player_instance.position.y++;
+    img_background_instance.geometry.x++;
+    player_instance.geometry.y++;
 
     if (frame_count++ == 100) {
         PP.assets.sprite.animation_stop(player_instance);
