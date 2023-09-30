@@ -1,4 +1,4 @@
-let step_length = 2;
+let step_length = 4;
 let floor_height = 650;
 
 let img_background;
@@ -18,7 +18,7 @@ function create(s) {
     console.log("Executing create() - SCENE 2");
     img_background_inst = PP.assets.image.add(s, img_background, 0, 0, 0, 0);
 
-    img_player_inst     = PP.assets.image.add(s, img_player, 0, floor_height, 0.5, 1);
+    img_player_inst     = PP.assets.image.add(s, img_player, 200, floor_height, 0.5, 1);
 
     img_player_inst.geometry.scale_x=0.5;
     img_player_inst.geometry.scale_y=0.5;
@@ -26,9 +26,18 @@ function create(s) {
 }
 
 function update(s) {
-    //console.log("Executing update() - SCENE 2");
-    img_player_inst.geometry.flip_x = true;
-//    console.log(img_player_inst.geometry.display_width);
+        img_player_inst.geometry.x += step_length;
+
+        // Estremo destro del riquadro di gioco
+        if (img_player_inst.geometry.x >= PP.game.config.canvas_width - img_player_inst.geometry.display_width/2){
+            img_player_inst.geometry.flip_x = true; // Inverte l'orientamento dell'immagine del giocatore rispetto all'asse x
+            step_length = step_length * -1; // Inverte la direzione di moto
+        }
+        // Estremo sinistro del riquadro di gioco
+        if (img_player_inst.geometry.x <= img_player_inst.geometry.display_width/2){
+            img_player_inst.geometry.flip_x = false; // Ripristina l'orientamento dell'immagine del giocatore rispetto all'asse x
+            step_length = step_length * -1; // Ripristina la direzione di moto
+        }
 
 }
 
