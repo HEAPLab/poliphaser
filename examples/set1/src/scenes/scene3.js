@@ -10,6 +10,8 @@ let player;
 
 function preload(s) {
     console.log("Executing preload() - SCENE 3");
+
+    // Carichiamo gli asset grafici
     img_background = PP.assets.image.load(s, "assets/images/background.png");
     img_player     = PP.assets.image.load(s, "assets/images/player.png");
 
