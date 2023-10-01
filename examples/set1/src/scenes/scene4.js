@@ -29,13 +29,13 @@ function create(s) {
 function update(s) {
 
     // E' stato premuto il tasto freccia sinistra e il giocatore è a destra del limite sinistro del quadro?
-    if(PP.interactive.kb.is_key_down(s, PP.KeyCodes.LEFT) && player.geometry.x >= 0) {
+    if(PP.interactive.kb.is_key_down(s, PP.key_codes.LEFT) && player.geometry.x >= 0) {
         console.log("Pressed left arrow.");
         player.geometry.flip_x = true;        // Volta il giocatore verso sinistra
         player.geometry.x     -= step_length; // Sposta il giocatore verso a sinistra
     }
 
-    if(PP.interactive.kb.is_key_down(s, PP.KeyCodes.RIGHT) && player.geometry.x <= PP.game.config.canvas_width - player.geometry.display_width) {
+    if(PP.interactive.kb.is_key_down(s, PP.key_codes.RIGHT) && player.geometry.x <= PP.game.config.canvas_width - player.geometry.display_width) {
         console.log("Pressed right arrow.");
         player.geometry.flip_x = false;        // Volta il giocatore verso destra
         player.geometry.x     += step_length; // Sposta il giocatore verso a destra

@@ -43,7 +43,7 @@ function create(s) {
 
 function update(s) {
 
-    if(PP.interactive.kb.is_key_up(s, PP.KeyCodes.SPACE)) {
+    if(PP.interactive.kb.is_key_up(s, PP.key_codes.SPACE)) {
         console.log("PRESSING SPACE!");
         return;
     }
