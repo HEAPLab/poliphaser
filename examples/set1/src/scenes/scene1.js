@@ -5,7 +5,7 @@ let img_background;
 let img_player;
 
 let img_background_inst;
-let img_player_inst;
+let player;
 
 function preload(s) {
     console.log("Executing preload() - SCENE 1");
@@ -18,16 +18,16 @@ function create(s) {
     console.log("Executing create() - SCENE 1");
     img_background_inst = PP.assets.image.add(s, img_background, 0, 0, 0, 0);
 
-    img_player_inst     = PP.assets.image.add(s, img_player, 0, floor_height, 0.5, 1);
+    player     = PP.assets.image.add(s, img_player, 0, floor_height, 0.5, 1);
 
-    img_player_inst.geometry.scale_x=0.5;
-    img_player_inst.geometry.scale_y=0.5;
+    player.geometry.scale_x=0.5;
+    player.geometry.scale_y=0.5;
 
 }
 
 function update(s) {
     console.log("Executing update() - SCENE 1");
-    img_player_inst.geometry.x += step_length;
+    player.geometry.x += step_length;
 
 }
 
