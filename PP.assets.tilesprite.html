@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>geometry - Documentation</title>
+    <title>tilesprite - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">geometry</h1>
+    <h1 class="page-title">tilesprite</h1>
     
 
     
@@ -42,7 +42,9 @@
 <header>
     
         <h2>
-        geometry
+            <span class="ancestors"><a href="PP.html">PP</a><a href="PP.assets.html">.assets</a>.</span>
+        
+        tilesprite
         </h2>
         
     
@@ -52,263 +54,88 @@
     <div class="container-overview">
     
         
-            <div class="description">The geomtry namespace is a particular namespace that is contained in several objects like
-images, sprites, polygons, etc.</div>
+            <div class="description">The namespace containing functions to load and manage tilesprites assets</div>
         
 
         
 
 
-    <h5 class="subsection-title">Properties:</h5>
+<dl class="details">
 
     
 
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
     
-
-        <tr>
-            
-                <td class="name"><code>x</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The horizontal position (in pixels)</td>
-        </tr>
-
-        
 
     
 
-        <tr>
-            
-                <td class="name"><code>y</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The vertical position (in pixels)</td>
-        </tr>
-
-        
+    
 
     
 
-        <tr>
-            
-                <td class="name"><code>scale_x</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The horizontal scale (ratio, 1=100% of the original size, 2=twice the original size, etc.)</td>
-        </tr>
-
-        
+    
 
     
 
-        <tr>
-            
-                <td class="name"><code>scale_y</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The vertical scale (ratio, 1=100% of the original size, 2=twice the original size, etc.)</td>
-        </tr>
-
-        
+    
 
     
 
-        <tr>
-            
-                <td class="name"><code>flip_x</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>boolean</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Flip horizontal</td>
-        </tr>
-
-        
+    
 
     
 
-        <tr>
-            
-                <td class="name"><code>flip_y</code></td>
-            
+    
 
-            <td class="type">
-            
-                
-<span class="param-type"><code>boolean</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Flip vertical</td>
-        </tr>
-
-        
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line191">line 191</a>
+    </li></ul></dd>
+    
 
     
 
-        <tr>
-            
-                <td class="name"><code>angle</code></td>
-            
+    
 
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
+    
+</dl>
 
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The rotation angle, from 0 to 360</td>
-        </tr>
 
         
+    
+    </div>
 
     
 
-        <tr>
-            
-                <td class="name"><code>display_width</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">(read-only) The displayed width in px (affected by scale)</td>
-        </tr>
-
-        
+    
 
     
 
-        <tr>
-            
-                <td class="name"><code>display_height</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">(read-only) The displayed height in px (affected by scale)</td>
-        </tr>
-
-        
+     
 
     
-    </tbody>
-</table>
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id=".add"><span class="type-signature">(static) </span>add<span class="signature">(scene, image, x, y, width, height)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Stop the current animation of the sprite instance passed as parameter
+</div>
+
 
 
 
@@ -342,7 +169,7 @@ images, sprites, polygons, etc.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line23">line 23</a>
+        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line672">line 672</a>
     </li></ul></dd>
     
 
@@ -354,22 +181,211 @@ images, sprites, polygons, etc.</div>
 </dl>
 
 
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
         
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
     
-    </div>
+
+        <tr>
+            
+                <td class="name"><code>scene</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>object</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                The scene object where to add the image.
+                
+            </td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>image</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>object</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                The object of an image returned by PP.assets.image.load
+                
+            </td>
+        </tr>
 
     
 
-     
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>number</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                The horizontal initial position in pixels of the image.
+                
+            </td>
+        </tr>
 
     
 
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>number</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                The vertical initial position in pixels of the image.
+                
+            </td>
+        </tr>
+
     
 
+        <tr>
+            
+                <td class="name"><code>width</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>number</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                The width of the tilesprite. If zero it will use the size of the texture frame.
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>height</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>number</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                The height of the tilesprite. If zero it will use the size of the texture frame.
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+        
     
 
     
