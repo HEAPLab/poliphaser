@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>kb - Documentation</title>
+    <title>camera - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">kb</h1>
+    <h1 class="page-title">camera</h1>
     
 
     
@@ -42,9 +42,9 @@
 <header>
     
         <h2>
-            <span class="ancestors"><a href="PP.html">PP</a><a href="PP.interactive.html">.interactive</a>.</span>
+            <span class="ancestors"><a href="PP.html">PP</a>.</span>
         
-        kb
+        camera
         </h2>
         
     
@@ -54,7 +54,7 @@
     <div class="container-overview">
     
         
-            <div class="description">The namespace containing functions for the keyboard management.</div>
+            <div class="description">The namespace containing functions for the management of the camera.</div>
         
 
         
@@ -89,7 +89,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line236">line 236</a>
+        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line258">line 258</a>
     </li></ul></dd>
     
 
@@ -126,14 +126,14 @@
 
     
 
-    <h4 class="name" id=".is_key_down"><span class="type-signature">(static) </span>is_key_down<span class="signature">(scene, key_code)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".start_follow"><span class="type-signature">(static) </span>start_follow<span class="signature">(scene, obj, offset_x, offset_y)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Test if a keyboard button is pressed.
+    Make the camera following an object.
 </div>
 
 
@@ -169,7 +169,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line908">line 908</a>
+        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line956">line 956</a>
     </li></ul></dd>
     
 
@@ -239,155 +239,7 @@
 
         <tr>
             
-                <td class="name"><code>key_code</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>key_code</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                One of the key codes of PP.key_codes.
-                
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="section-returns">
-<h5>Returns:</h5>
-
-        
-
-
-<div class="param-desc">
-    true if the button is pressed, false otherwise
-</div>
-
-    
-</div>
-
-
-
-</div>
-        
-            
-<div class="section-method">
-
-    
-
-    <h4 class="name" id=".is_key_up"><span class="type-signature">(static) </span>is_key_up<span class="signature">(scene, key_code)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    Test if a keyboard button is NOT pressed.
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line931">line 931</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>scene</code></td>
+                <td class="name"><code>obj</code></td>
             
 
             <td class="type">
@@ -404,7 +256,7 @@
             
 
             <td class="description last">
-                The scene object.
+                The object to follow (sprite, image, etc.).
                 
             </td>
         </tr>
@@ -413,13 +265,13 @@
 
         <tr>
             
-                <td class="name"><code>key_code</code></td>
+                <td class="name"><code>offset_x</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><code>key_code</code></span>
+<span class="param-type"><code>number</code></span>
 
 
             
@@ -430,7 +282,33 @@
             
 
             <td class="description last">
-                One of the key codes of PP.key_codes.
+                Offset X of the object to follow
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>offset_y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>number</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                Offset Y of the object to follow
                 
             </td>
         </tr>
@@ -451,19 +329,6 @@
 
 
 
-
-<div class="section-returns">
-<h5>Returns:</h5>
-
-        
-
-
-<div class="param-desc">
-    true if the button is not pressed, false otherwise
-</div>
-
-    
-</div>
 
 
 
