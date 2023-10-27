@@ -10,11 +10,17 @@ function preload(s) {
 function create(s) {
     console.log("Executing create() - SCENE 2");
     img_background_instance = PP.assets.image.add(s, img_background, 0, 0, 0, 0);
+    
+    console.log(PP.gameState.get_Variable("test1"));
+    PP.gameState.set_Variable("test1", "hi");
+
+    PP.shapes.text_add(s, 50,80,"HI " + PP.gameState.get_Variable("test1"));
 
 }
 
 function update(s) {
     console.log("Executing update() - SCENE 2");
+    console.log(PP.gameState.get_Variable("test1"));
 
 }
 

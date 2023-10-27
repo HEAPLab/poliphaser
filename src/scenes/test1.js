@@ -8,6 +8,8 @@ let ss_player;
 let player_instance;
 let frame_count = 0;
 
+let txt;
+
 function on_sprite_click() {
     PP.scenes.start("test2");
 }
@@ -39,12 +41,27 @@ function create(s) {
     PP.interactive.mouse.add(player_instance, "pointerdown", on_sprite_click);
     //PP.interactive.mouse.remove_all(player_instance, "pointerdown");
 
+
+    PP.gameState.set_Variable("test1", {"hi":2});
+
+    
+    //txt = PP.shapes.text_styled_add(s, 100,100,"Nice to meet you", 600, "Times", "normal", "0X00FF00", "0X0000FF");
+    //arc.scroll_factor_x = 0;
+
+    console.log(PP.timers.getTime(s));
+
+    PP.timers.add_timer(s, 1500, sayHI, false);
+}
+
+function sayHI(s){
+    console.log("HI");
 }
 
 function update(s) {
 
     if(PP.interactive.kb.is_key_up(s, PP.key_codes.SPACE)) {
-        console.log("PRESSING SPACE!");
+        /*console.log("PRESSING SPACE!");
+        console.log(PP.gameState.get_Variable("test1"));*/
         return;
     }
     console.log("Executing update() - SCENE 1");
@@ -55,6 +72,8 @@ function update(s) {
     if (frame_count++ == 100) {
         PP.assets.sprite.animation_stop(player_instance);
     }
+
+    //PP.shapes.changeText(txt, "HI AGAIN");
 
 }
 
