@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>game - Documentation</title>
+    <title>timers - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">game</h1>
+    <h1 class="page-title">timers</h1>
     
 
     
@@ -44,7 +44,7 @@
         <h2>
             <span class="ancestors"><a href="PP.html">PP</a>.</span>
         
-        game
+        timers
         </h2>
         
     
@@ -54,7 +54,7 @@
     <div class="container-overview">
     
         
-            <div class="description">The namespace containing the main functions of the game engine.</div>
+            <div class="description">The list of timers applied in the scene</div>
         
 
         
@@ -89,7 +89,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line172">line 172</a>
+        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line193">line 193</a>
     </li></ul></dd>
     
 
@@ -126,14 +126,14 @@
 
     
 
-    <h4 class="name" id=".create"><span class="type-signature">(static) </span>create<span class="signature">(config)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".add_timer"><span class="type-signature">(static) </span>add_timer<span class="signature">(scene, delay, function_to_call, loop)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Create the game object and initialize the Phaser framework.  This function must be called before PP.game.start is executed.
+    Create a timer to start a function after a detemrined delay
 </div>
 
 
@@ -169,7 +169,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line285">line 285</a>
+        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line1108">line 1108</a>
     </li></ul></dd>
     
 
@@ -213,10 +213,15 @@
 
         <tr>
             
-                <td class="name"><code>config</code></td>
+                <td class="name"><code>scene</code></td>
             
 
             <td class="type">
+            
+                
+<span class="param-type"><code>object</code></span>
+
+
             
             </td>
 
@@ -225,33 +230,16 @@
             
 
             <td class="description last">
-                The object containing the game configuration.
+                the scene in which the timer take place
                 
-                    
+            </td>
+        </tr>
 
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
     
 
         <tr>
             
-                <td class="name"><code>canvas_width</code></td>
+                <td class="name"><code>delay</code></td>
             
 
             <td class="type">
@@ -268,7 +256,7 @@
             
 
             <td class="description last">
-                The width  of the canvas where the game will be rendered.
+                the amount of seconds to be waited
                 
             </td>
         </tr>
@@ -277,13 +265,13 @@
 
         <tr>
             
-                <td class="name"><code>canvas_height</code></td>
+                <td class="name"><code>function_to_call</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><code>number</code></span>
+<span class="param-type"><code>function_to_call</code></span>
 
 
             
@@ -294,7 +282,7 @@
             
 
             <td class="description last">
-                The height of the canvas where the game will be rendered.
+                Callback function to call when an event occurred. The function must accept one parameter: the current scene.
                 
             </td>
         </tr>
@@ -303,59 +291,7 @@
 
         <tr>
             
-                <td class="name"><code>canvas_id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>string</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                The id of the HTML element containing the canvas.
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>background_color</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                Default background color used when no background is drawn, in RGB HEX format (for example 0x000000).
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>debug_mode</code></td>
+                <td class="name"><code>loop</code></td>
             
 
             <td class="type">
@@ -372,41 +308,7 @@
             
 
             <td class="description last">
-                It defines whether PoliPhaser should run in debug mode showing various debug information.
                 
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>gravity_value</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                The value of gravity in pixels per second squared.
-                
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
                 
             </td>
         </tr>
@@ -428,135 +330,23 @@
 
 
 
-<div class="section-returns">
-<h5>Returns:</h5>
-
-        
-
-
-<div class="param-desc">
-    A game object. The user should not directly manipulate it, but pass it to other functions.
-</div>
-
-    
-</div>
-
 
 
 </div>
-        
-    
-
-    
-
-    
-</article>
-
-</section>
-
-
-
-
-
-
-
-<section>
-
-<header>
-    
-        <h2>
-            <span class="ancestors"><a href="PP.html">PP</a>.</span>
-        
-        game
-        </h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description">The namespace containing the state variables of the game.</div>
-        
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line179">line 179</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
         
             
 <div class="section-method">
 
     
 
-    <h4 class="name" id=".create"><span class="type-signature">(static) </span>create<span class="signature">(config)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".getTime"><span class="type-signature">(static) </span>getTime<span class="signature">(s)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Create the game object and initialize the Phaser framework.  This function must be called before PP.game.start is executed.
+    Get the current time of the game
 </div>
 
 
@@ -592,7 +382,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line285">line 285</a>
+        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line1128">line 1128</a>
     </li></ul></dd>
     
 
@@ -636,51 +426,13 @@
 
         <tr>
             
-                <td class="name"><code>config</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                The object containing the game configuration.
-                
-                    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>canvas_width</code></td>
+                <td class="name"><code>s</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><code>number</code></span>
+<span class="param-type"><code>object</code></span>
 
 
             
@@ -691,145 +443,7 @@
             
 
             <td class="description last">
-                The width  of the canvas where the game will be rendered.
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>canvas_height</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                The height of the canvas where the game will be rendered.
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>canvas_id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>string</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                The id of the HTML element containing the canvas.
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>background_color</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                Default background color used when no background is drawn, in RGB HEX format (for example 0x000000).
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>debug_mode</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>boolean</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                It defines whether PoliPhaser should run in debug mode showing various debug information.
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>gravity_value</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                The value of gravity in pixels per second squared.
-                
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
+                the scene
                 
             </td>
         </tr>
@@ -858,7 +472,7 @@
 
 
 <div class="param-desc">
-    A game object. The user should not directly manipulate it, but pass it to other functions.
+    the seconds form the begining of the execution of the scene
 </div>
 
     
