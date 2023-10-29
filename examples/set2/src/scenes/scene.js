@@ -44,6 +44,9 @@ function create(s) {
 
     PP.physics.add_collider_f(s, player, box, collider_test); 
 
+    PP.physics.set_bounce_y(player, 0.5); 
+
+
 }
 
 function update(s) {
