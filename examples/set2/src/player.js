@@ -11,8 +11,6 @@ function configure_player_animations(s, player) {
     PP.assets.sprite.animation_add(player, "stop", 21, 21, 10, 0);
     PP.assets.sprite.animation_play(player, "stop");
 
-
-    console.log(player.geometry)
 }
 
 function manage_player_update(s, player) {
@@ -31,11 +29,13 @@ function manage_player_update(s, player) {
         next_anim = "stop";
     }
 
-    if(player.geometry.y>=floor_height-1) {
+    if(player.geometry.y>=floor_height-1 || player.is_on_platform) {
         if(PP.interactive.kb.is_key_down(s, PP.key_codes.SPACE)) {
             PP.physics.set_velocity_y(player, -jump_init_speed);
         }
     }
+
+    player.is_on_platform = false;
 
     if(PP.physics.get_velocity_y(player) < 0) {
         next_anim = "jump_up";
