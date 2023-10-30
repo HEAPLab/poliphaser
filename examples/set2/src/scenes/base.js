@@ -40,7 +40,7 @@ function create(s) {
     create_mushrooms(s, player);
 
     PP.gameState.set_variable("score", 0);
-    txt_score = PP.shapes.text_styled_add(s, 10, 10, "Score: 0", 30, "Helvetica", "normal", "0xFFFFFF", "0x000000")
+    txt_score = PP.shapes.text_styled_add(s, 10, 10, "Score: 0", 30, "Helvetica", "normal", "0xFFFFFF", null);
 
 }
 

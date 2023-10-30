@@ -46,7 +46,6 @@ function create(s) {
 
     PP.physics.set_bounce_y(player, 0.5); 
 
-
 }
 
 function update(s) {
