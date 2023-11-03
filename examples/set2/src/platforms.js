@@ -7,8 +7,13 @@ function preload_platforms(s) {
 }
 
 function collision_platform(s, player, platform) {
-    if(player.geometry.x >= platform.geometry.x) {
-        player.is_on_platform = true;
+    // Funzione di collisione con le piattaforme.
+    // Qui devo verificare che il giocatore si trovi sopra
+    // la piattaforma e in quel caso aggiorno la variabile che
+    // abilita il salto (v. player.js)
+    if( player.geometry.x >= platform.geometry.x &&
+        player.geometry.x <= platform.geometry.x + platform.geometry.display_width) {
+            player.is_on_platform = true;
     }
 }
 
@@ -31,11 +36,14 @@ function create_platforms(s, player) {
 
 function update_platforms(s) {
 
+    // Aggiorno la velocita' della piattaforma mobile nel
+    // caso in cui si trovi al limite destro o il limite sinistro
+    // scelto (800 - 1200)
+
     if(platform_2.geometry.x >= 1200) {
         PP.physics.set_velocity_x(platform_2, -100);
     }
-
-    if(platform_2.geometry.x <= 800) {
+    else if(platform_2.geometry.x <= 800) {
         PP.physics.set_velocity_x(platform_2, 100);
     }
 
