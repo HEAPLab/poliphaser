@@ -44,7 +44,7 @@ function create(s) {
     configure_player_animations(s, player); // Impostazione animazioni giocatore
     create_platforms(s, player);            // Creazione piattaforme
     create_mushrooms(s, player);            // Creazione funghetti
-    create_enemy(s, player);
+    create_enemy(s, player, floor);
 
     // Creo una variabile per lo "score" della scena
     PP.gameState.set_variable("score", 0);
@@ -55,6 +55,11 @@ function create(s) {
 
     // Follow
     PP.camera.start_follow(s, player, 0, 220);
+
+    // Collision rectangle
+    //PP.physics.set_collision_rectangle(player, 100, 160, 80, 10); 
+    //PP.physics.set_collision_circle(player, 80, 50, 10); 
+
 
 }
 
