@@ -32,6 +32,10 @@ function create_platforms(s, player) {
     PP.physics.add_collider_f(s, player, platform_2, collision_platform);
     PP.physics.set_velocity_x(platform_2, 100);
 
+    // Riduco i collision boundaries in modo che
+    // l'erba non causi un "innalzamento" del giocatore
+    PP.physics.set_collision_rectangle(platform, 400, 68, 0, 21);
+
 }
 
 function update_platforms(s) {

@@ -12,9 +12,10 @@ function preload(s) {
     img_background = PP.assets.image.load(s, "assets/images/background.png");
     img_player     = PP.assets.sprite.load_spritesheet(s, "assets/images/spritesheet_player.png", 223, 190);
 
-    preload_player(s);
+    // Preload dei vari elementi della scena
     preload_platforms(s);
     preload_mushrooms(s);
+    preload_player(s);
     preload_enemy(s);
 }
 
@@ -48,18 +49,19 @@ function create(s) {
 
     // Creo una variabile per lo "score" della scena
     PP.gameState.set_variable("score", 0);
-    txt_score = PP.shapes.text_styled_add(s, 10, 10, "Score: 0", 30, "Helvetica", "normal", "0xFFFFFF", null);
+    txt_score = PP.shapes.text_styled_add(s, 10, 10, "Score: 0", 30, "Helvetica", "normal", "0xFFFFFF", null, 0, 0);
 
+    // Impostiamo il testo in alto a sx in modo che non si muova
+    // con la camera (essendo HUD deve rimanere fisso)
     txt_score.tile_geometry.scroll_factor_x = 0;
     txt_score.tile_geometry.scroll_factor_y = 0;
 
-    // Follow
+    // Impostiamo la camera che segua il giocatore
     PP.camera.start_follow(s, player, 0, 220);
 
-    // Collision rectangle
-    //PP.physics.set_collision_rectangle(player, 100, 160, 80, 10); 
-    //PP.physics.set_collision_circle(player, 80, 50, 10); 
-
+    // Esempi di cambio del collision rectangle
+    //PP.physics.set_collision_rectangle(player, 100, 160, 85, 10);
+    //PP.physics.set_collision_circle(player, 80, 50, 10);
 
 }
 
@@ -69,8 +71,8 @@ function update(s) {
     manage_player_update(s, player);    // Posizione del giocatore e animazioni
     update_platforms(s);                // Movimento piattaforme
     update_mushrooms(s);                // Azioni funghetti
-    manage_player_weapons(s, player);
-    update_enemy(s, player);
+    manage_player_weapon(s, player);    // Gestione armi
+    update_enemy(s);
 
     // Aggiorno il punteggio visualizzato:
     PP.shapes.text_change(txt_score, "Score: " + PP.gameState.get_variable("score"));

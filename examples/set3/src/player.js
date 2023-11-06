@@ -91,34 +91,52 @@ function manage_player_update(s, player) {
 let weapon_disabled = false;
 
 function reenable_weapon(s) {
+    // Funzione che viene chiamata allo scadere del timer
     weapon_disabled = false;
 }
 
-function manage_player_weapons(s, player) {
+function manage_player_weapon(s, player) {
 
-    if(weapon_disabled) {
-        return;
+    if(weapon_disabled == true) {
+        // Se l'arma e' disabilitata (v. timer)...
+        
+        return; // Esce immediatamente dalla funzione senza eseguire
+                // il codice sottostante
     }
 
-    if(PP.interactive.kb.is_key_down(s, PP.key_codes.F)) {
-        let speed = 1000;
+    if (PP.interactive.kb.is_key_down(s, PP.key_codes.F)) {
+
         let offset = 70;
-        if(player.geometry.flip_x) {
-            speed  = - speed;
-            offset = - offset;
+        let velocity = 1000;
+
+        if(player.geometry.flip_x) {    // == true
+            // Inverto offset e velocita' dello
+            // shuriken se il giocatore guarda verso sx
+            offset   = - offset;
+            velocity = - velocity;
         }
 
-        let shuriken = PP.assets.image.add(s, img_shuriken, player.geometry.x + offset, player.geometry.y - 75, 0.5, 0.5);
-
+        // Creo un nuovo shuriken (immagine)
+        let shuriken = PP.assets.image.add(s, img_shuriken,
+                                player.geometry.x + offset, player.geometry.y - 70,
+                                0.5, 0.5);
+        
         PP.physics.add(s, shuriken, PP.physics.type.DYNAMIC);
-        PP.physics.set_allow_gravity(shuriken, false);
-
         PP.physics.set_rotation(shuriken, 360);
+        PP.physics.set_allow_gravity(shuriken, false);
+        PP.physics.set_velocity_x(shuriken, velocity);
 
-        PP.physics.set_velocity_x(shuriken, speed);
+        PP.physics.add_collider_f(s, shuriken, enemy, hit_enemy);
 
         weapon_disabled = true;
+
+        // Tra 500 secondi riporto weapon disabled a false
         PP.timers.add_timer(s, 500, reenable_weapon, false);
     }
-    
+}
+
+function hit_enemy(s, obj1, obj2) {
+    // Se lo shuriken colpisce il nemico, distruggo entrambi
+    PP.assets.destroy(obj1);
+    PP.assets.destroy(obj2);
 }
