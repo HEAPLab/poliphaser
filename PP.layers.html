@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>image - Documentation</title>
+    <title>layers - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">image</h1>
+    <h1 class="page-title">layers</h1>
     
 
     
@@ -42,9 +42,9 @@
 <header>
     
         <h2>
-            <span class="ancestors"><a href="PP.html">PP</a><a href="PP.assets.html">.assets</a>.</span>
+            <span class="ancestors"><a href="PP.html">PP</a>.</span>
         
-        image
+        layers
         </h2>
         
     
@@ -54,7 +54,7 @@
     <div class="container-overview">
     
         
-            <div class="description">The namespace containing functions to load and manage image assets</div>
+            <div class="description">The namespace containing functions to manage layers</div>
         
 
         
@@ -89,7 +89,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line257">line 257</a>
+        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line327">line 327</a>
     </li></ul></dd>
     
 
@@ -126,14 +126,14 @@
 
     
 
-    <h4 class="name" id=".add"><span class="type-signature">(static) </span>add<span class="signature">(scene, image, x, y, pivot_x, pivot_y)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".add_to_layer"><span class="type-signature">(static) </span>add_to_layer<span class="signature">(s, layer, obj)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Add and position a new image into the scene.
+    Add an object to a layer
 </div>
 
 
@@ -169,7 +169,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line597">line 597</a>
+        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line1643">line 1643</a>
     </li></ul></dd>
     
 
@@ -213,7 +213,7 @@
 
         <tr>
             
-                <td class="name"><code>scene</code></td>
+                <td class="name"><code>s</code></td>
             
 
             <td class="type">
@@ -230,7 +230,7 @@
             
 
             <td class="description last">
-                The scene object where to add the image.
+                The scene
                 
             </td>
         </tr>
@@ -239,7 +239,7 @@
 
         <tr>
             
-                <td class="name"><code>image</code></td>
+                <td class="name"><code>layer</code></td>
             
 
             <td class="type">
@@ -256,7 +256,7 @@
             
 
             <td class="description last">
-                The object of an image returned by PP.assets.image.load
+                The destination layer
                 
             </td>
         </tr>
@@ -265,13 +265,13 @@
 
         <tr>
             
-                <td class="name"><code>x</code></td>
+                <td class="name"><code>obj</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><code>number</code></span>
+<span class="param-type"><code>object</code></span>
 
 
             
@@ -282,85 +282,7 @@
             
 
             <td class="description last">
-                The horizontal initial position in pixels of the image.
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>y</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                The vertical initial position in pixels of the image.
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>pivot_x</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                The pivot X position **in percentage ** from 0 to 1.
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>pivot_y</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                The pivot Y position **in percentage ** from 0 to 1.
+                The object to add to the layer.
                 
             </td>
         </tr>
@@ -381,19 +303,6 @@
 
 
 
-
-<div class="section-returns">
-<h5>Returns:</h5>
-
-        
-
-
-<div class="param-desc">
-    An image object representing the specific image added to the scene.
-</div>
-
-    
-</div>
 
 
 
@@ -404,14 +313,14 @@
 
     
 
-    <h4 class="name" id=".load"><span class="type-signature">(static) </span>load<span class="signature">(image_path)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".create"><span class="type-signature">(static) </span>create<span class="signature">(s)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Load a new image.
+    Create a new empy layer
 </div>
 
 
@@ -447,7 +356,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line572">line 572</a>
+        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line1628">line 1628</a>
     </li></ul></dd>
     
 
@@ -491,13 +400,13 @@
 
         <tr>
             
-                <td class="name"><code>image_path</code></td>
+                <td class="name"><code>s</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><code>string</code></span>
+<span class="param-type"><code>object</code></span>
 
 
             
@@ -508,7 +417,7 @@
             
 
             <td class="description last">
-                A path of the image to load. It can be relative to the current page or a full URL.
+                The scene
                 
             </td>
         </tr>
@@ -530,18 +439,301 @@
 
 
 
-<div class="section-returns">
-<h5>Returns:</h5>
+
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id=".get_z_index"><span class="type-signature">(static) </span>get_z_index<span class="signature">(layer)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Get the depth (z-index) of the layer
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line1670">line 1670</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
 
         
 
+        
 
-<div class="param-desc">
-    An image object representing the image file itself.
-</div>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>layer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>object</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                The layer
+                
+            </td>
+        </tr>
 
     
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id=".set_z_index"><span class="type-signature">(static) </span>set_z_index<span class="signature">(layer, z_index)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Set the depth (z-index) of the layer
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="poliphaser.js.html">poliphaser.js</a>, <a href="poliphaser.js.html#line1658">line 1658</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>layer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>object</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                The destination layer
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>z_index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>number</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                The z-index.
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
